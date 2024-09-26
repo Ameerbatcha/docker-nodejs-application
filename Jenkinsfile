@@ -10,7 +10,7 @@ pipeline{
         stage('SCM'){
             steps{
                  deleteDir()
-                git 'https://github.com/Ameerbatcha/main/docker-nodejs-application.git'
+                 git branch: 'master', url: 'https://github.com/Ameerbatcha/main/docker-nodejs-application.git'
             }
         }
           stage('Bundleing all source code') {
