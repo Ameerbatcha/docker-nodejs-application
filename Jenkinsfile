@@ -32,7 +32,7 @@ pipeline{
                     sshTransfer(
                         cleanRemote: false,
                         excludes: '',
-                        execCommand: """cd /opt; 
+                        execCommand: """cd /opt/Node; 
                                         tar -xf Node.tar.gz; 
                                         docker build . -t securityanddevops/nodeapp:${DOCKER_TAG}
                                         docker login -u securityanddevops -p ${DOCKER_CRED}
@@ -43,7 +43,7 @@ pipeline{
                         makeEmptyDirs: false,
                         noDefaultExcludes: false,
                         patternSeparator: '[, ]+$',
-                        remoteDirectory: '//opt',
+                        remoteDirectory: '//opt//Node',
                         remoteDirectorySDF: false,
                         removePrefix: '',
                         sourceFiles: '**/*.gz'
