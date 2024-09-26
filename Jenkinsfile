@@ -9,7 +9,7 @@ pipeline{
     stages{
         stage('SCM'){
             steps{
-                 deleteDir()
+                 // deleteDir()
                 git 'https://github.com/Ameerbatcha/docker-nodejs-application.git'
             }
         }
