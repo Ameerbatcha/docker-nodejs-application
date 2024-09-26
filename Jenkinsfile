@@ -7,12 +7,12 @@ pipeline{
     }
 
     stages{
-        stage('SCM'){
-            steps{
-                 // deleteDir()
-                git 'https://github.com/Ameerbatcha/main/docker-nodejs-application.git'
-            }
-        }
+        // stage('SCM'){
+        //     steps{
+        //          // deleteDir()
+        //         git 'https://github.com/Ameerbatcha/main/docker-nodejs-application.git'
+        //     }
+        // }
           stage('Bundleing all source code') {
             steps {
                 sh 'tar czf Node.tar.gz *'
