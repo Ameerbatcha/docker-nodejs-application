@@ -80,19 +80,7 @@ pipeline{
  
 
                       tasks:
-                        - name: Install python pip
-                          yum:
-                            name: python-pip
-                            state: present
 
- 
-
-                        - name: Install docker-py python module
-                          pip:
-                            name: docker-py
-                            state: present
-
- 
 
                         - name: Start the container
                           docker_container:
