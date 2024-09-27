@@ -75,22 +75,42 @@ pipeline{
                 script {
                     def ansiblePlaybookContent = '''
                     - hosts: dev
-                      become: True
+                     become: True
+                     tasks:
+                      - name: Install python3-pip
+                        yum:
+                        name: python3-pip
+                        state: present
 
- 
+                      - name: Install Docker
+                        yum:
+                        name: docker
+                        state: present
 
-                      tasks:
+                      - name: Install Docker Python module for Python 3
+                        pip:
+                        executable: pip3
+                        name: docker
+                        state: present
+
+                      - name: Start and enable Docker service
+                        service:
+                        name: docker
+                        state: started
+                        enabled: true
 
 
-                        - name: Start the container
-                          docker_container:
-                            name: nodecontainer
-                            image: "securityanddevops/nodeapp:{{ DOCKER_TAG }}"
-                            state: started
-                            published_ports:
-                              - 0.0.0.0:3000:3001
+
+                      - name: Start the container
+                        docker_container:
+                        name: nodecontainer
+                        image: "securityanddevops/nodeapp:{{ DOCKER_TAG }}"
+                        state: started
+                        published_ports:
+                            - 0.0.0.0:3000:3001
                     '''
 
+ 
  
 
                     writeFile(file: 'inline_playbook.yml', text: ansiblePlaybookContent)
