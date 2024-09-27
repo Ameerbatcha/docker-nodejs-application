@@ -124,7 +124,7 @@ pipeline{
                         inventory: 'dev.inv',
                         playbook: 'inline_playbook.yml',
                         extras: "-e DOCKER_TAG=${DOCKER_TAG}",
-                        // credentialsId: 'dev-server',
+                         credentialsId: 'dev-server',
                         installation: 'ansible',
                         disableHostKeyChecking: true,
                     )
