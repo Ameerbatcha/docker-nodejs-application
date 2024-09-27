@@ -70,68 +70,68 @@ pipeline{
             }
           
 
-        // stage('Docker Deploy') {
-        //     steps {
-        //         script {
-        //             def ansiblePlaybookContent = '''
-        //             - hosts: dev
-        //               become: True
+        stage('Docker Deploy') {
+            steps {
+                script {
+                    def ansiblePlaybookContent = '''
+                    - hosts: dev
+                      become: True
 
  
 
-        //               tasks:
-        //                 - name: Install python pip
-        //                   yum:
-        //                     name: python-pip
-        //                     state: present
+                      tasks:
+                        - name: Install python pip
+                          yum:
+                            name: python-pip
+                            state: present
 
  
 
-        //                 - name: Install docker-py python module
-        //                   pip:
-        //                     name: docker-py
-        //                     state: present
+                        - name: Install docker-py python module
+                          pip:
+                            name: docker-py
+                            state: present
 
  
 
-        //                 - name: Start the container
-        //                   docker_container:
-        //                     name: nodecontainer
-        //                     image: "thoshinny/angularapp:{{ DOCKER_TAG }}"
-        //                     state: started
-        //                     published_ports:
-        //                       - 0.0.0.0:80:80
-        //             '''
+                        - name: Start the container
+                          docker_container:
+                            name: nodecontainer
+                            image: "securityanddevops/nodeapp:{{ DOCKER_TAG }}"
+                            state: started
+                            published_ports:
+                              - 0.0.0.0:3000:3001
+                    '''
 
  
 
-        //             writeFile(file: 'inline_playbook.yml', text: ansiblePlaybookContent)
+                    writeFile(file: 'inline_playbook.yml', text: ansiblePlaybookContent)
 
  
 
-        //            def ansibleInventoryContent = '''[dev]
-        //             172.31.42.16 ansible_user=ec2-user
-        //             '''
+                   def ansibleInventoryContent = '''[dev]
+                    172.31.25.142 ansible_user=ec2-user
+                    '''
 
  
 
-        //             writeFile(file: 'dev.inv', text: ansibleInventoryContent)
+                    writeFile(file: 'dev.inv', text: ansibleInventoryContent)
 
  
 
    
-        //             ansiblePlaybook(
-        //                 inventory: 'dev.inv',
-        //                 playbook: 'inline_playbook.yml',
-        //                 extras: "-e DOCKER_TAG=${DOCKER_TAG}",
-        //                 credentialsId: 'dev-server',
-        //                 installation: 'ansible',
-        //                 disableHostKeyChecking: true,
-        //             )
+                    ansiblePlaybook(
+                        inventory: 'dev.inv',
+                        playbook: 'inline_playbook.yml',
+                        extras: "-e DOCKER_TAG=${DOCKER_TAG}",
+                        // credentialsId: 'dev-server',
+                        installation: 'ansible',
+                        disableHostKeyChecking: true,
+                    )
 
-        //       }
-        //     }
-        // }
+              }
+            }
+        }
 
  
 
