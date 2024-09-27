@@ -74,7 +74,7 @@ pipeline{
             steps {
                 script {
                     def ansiblePlaybookContent = '''
-                    - hosts: dev
+                   - hosts: dev
                      become: True
                      tasks:
                       - name: Install python3-pip
